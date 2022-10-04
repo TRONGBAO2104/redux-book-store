@@ -1,6 +1,7 @@
 # Book Store App
 
 Exercise: Refactor the code to use Redux
+
 **Demo App:** https://book-store-by-baobao.netlify.app/
 
 ## Getting Started
