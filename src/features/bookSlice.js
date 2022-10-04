@@ -25,6 +25,7 @@ const bookSlice = createSlice({
     },
 
     getBooksListSuccess(state, action) {
+      console.log("getBooksListSuccess", action.payload);
       state.isLoading = false;
       state.error = null;
       state.books = action.payload;
@@ -43,7 +44,6 @@ const bookSlice = createSlice({
     },
 
     getBooksFromReadingListSuccess(state, action) {
-      console.log("action.payload", action.payload);
       state.isLoading = false;
       state.error = null;
       state.readingList = action.payload;
@@ -52,11 +52,6 @@ const bookSlice = createSlice({
     removeBookFromReadingListSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      // state.readingList = action.payload;
-      // const bookId = action.payload._id;
-      // state.readingList = state.readingList.filter(
-      //   (post) => post !== postId
-      // );
     },
   },
 });
@@ -109,7 +104,7 @@ export const getBooksFromReadingList = () => async (dispatch) => {
   dispatch(bookSlice.actions.startLoading());
   try {
     const response = await apiService.get("/favorites");
-    console.log("getBooksFromReadingList", response.data);
+    // console.log("getBooksFromReadingList", response.data);
     dispatch(bookSlice.actions.getBooksFromReadingListSuccess(response.data));
   } catch (error) {
     dispatch(bookSlice.actions.hasError());
@@ -118,11 +113,13 @@ export const getBooksFromReadingList = () => async (dispatch) => {
 };
 
 export const removeBookFromReadingList =
-  ({ bookId }) =>
+  ({ book }) =>
   async (dispatch) => {
     dispatch(bookSlice.actions.startLoading());
     try {
-      const response = await apiService.delete(`/favorites/${bookId}`);
+      // const x = book.map((book) => book.id);
+      // console.log(x);
+      const response = await apiService.delete(`/favorites/${book.id}`);
       console.log("removeBookFromReadingList", response.data);
       dispatch(
         bookSlice.actions.removeBookFromReadingListSuccess(response.data)

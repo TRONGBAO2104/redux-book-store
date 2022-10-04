@@ -28,7 +28,7 @@ api.interceptors.response.use(
   function (error) {
     error = error.response.data;
     console.log("RESPONSE ERROR", error);
-    return Promise.reject({ message: error.split("\n")[0] });
+    // return Promise.reject({ message: error.split("\n")[0] });
   }
 );
 

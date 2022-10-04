@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,7 @@ const BookDetailPage = () => {
 
   // const [loading, setLoading] = useState(false);
   // const [book, setBook] = useState(null);
-  const [addingBook, setAddingBook] = useState(false);
+  // const [addingBook, setAddingBook] = useState(false);
 
   const params = useParams();
   const bookId = params.id;

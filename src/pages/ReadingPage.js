@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Button,
@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import api from "../apiService";
 import { useDispatch } from "react-redux";
 
 import { getBooksFromReadingList } from "../features/bookSlice";
@@ -25,21 +23,20 @@ const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 const ReadingPage = () => {
   const dispatch = useDispatch();
   const { isLoading, readingList } = useSelector((state) => state.book);
-  console.log("readingList", readingList);
+  // console.log("readingList", readingList);
 
-  // const books = readingList.map((book) => )
   // const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [removedBookId, setRemovedBookId] = useState("");
+  // const [loading, setLoading] = useState(false);
+  // const [removedBookId, setRemovedBookId] = useState("");
   const navigate = useNavigate();
 
   const handleClickBook = (bookId) => {
     navigate(`/books/${bookId}`);
   };
 
-  const removeBook = (bookId) => {
-    console.log("removeBook", bookId);
-    dispatch(removeBookFromReadingList({ bookId }));
+  const removeBook = (book) => {
+    console.log("removeBook", book);
+    dispatch(removeBookFromReadingList({ book }));
     // setRemovedBookId(bookId);
   };
 
@@ -140,7 +137,7 @@ const ReadingPage = () => {
                       minWidth: "1.5rem",
                     }}
                     size="small"
-                    onClick={() => removeBook(book.book?.id)}
+                    onClick={() => removeBook(book)}
                   >
                     &times;
                   </Button>
